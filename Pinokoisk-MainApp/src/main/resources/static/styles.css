@@ -1,0 +1,74 @@
+/*all*/
+.page_top {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: rgba(0, 0, 0, 0.85);
+}
+
+/*top*/
+.page_top_left {
+    margin-left: 5px;
+    margin-top: -15px;
+
+}
+
+.page_top_left h1 {
+    float: left;
+    background-image: linear-gradient(to left, violet, indigo, blue, green, yellow, orange, red);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+/*middle*/
+.page_top_middle {
+    margin: 0 auto;
+    margin-left: 10px;
+    display: inline-block;
+
+}
+
+.page_top_middle a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    margin-top: 14px;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    text-shadow: 1px 1px #000000;
+}
+
+.page_top_middle a:hover {
+    background-color: rgba(7, 95, 127, 0.36);
+    color: white;
+    text-shadow: 1px 1px #000000;
+}
+
+.page_top_middle a.active {
+    background-color: #075f7f;
+    color: white;
+    text-shadow: 1px 1px #000000;
+}
+
+/*right*/
+.page_top_right {
+    margin-right: 5px;
+    margin-top: 30px;
+    float: right;
+}
+
+.page_top_right h1 {
+    float: right;
+    color: #f2f2f2;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: beige;
+}
+
+.page_content {
+    margin: 15px;
+    background-color: white;
+}
+

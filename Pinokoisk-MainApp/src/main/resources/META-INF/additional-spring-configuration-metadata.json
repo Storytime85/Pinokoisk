@@ -1,0 +1,14 @@
+{
+  "properties": [
+    {
+      "name": "redis.config.hostname",
+      "type": "java.lang.String",
+      "description": "Hostname for redis cluster."
+    },
+    {
+      "name": "redis.config.port",
+      "type": "java.lang.Integer",
+      "description": "Redis cluster port."
+    }
+  ]
+}

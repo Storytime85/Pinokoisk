@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Фильм/Сериал NAME</title>
+    <link rel="stylesheet" th:href="@{/styles.css}" type="text/css"/>
+</head>
+
+<body>
+<header class="page_top">
+    <div class="page_top_left">
+        <h1>Пинокоиск</h1>
+    </div>
+    <div class="page_top_middle">
+        <a th:href="@{/}">Главная</a>
+        <a th:href="@{/movies}">Фильмы</a>
+        <a th:href="@{/series}">Сериалы</a>
+        <a th:href="@{/collections}">Подборки</a>
+        <a th:href="@{/persons/all}">Персоны</a>
+        <a th:href="@{/search}">Поиск</a>
+    </div>
+    <div class="page_top_right">
+        <div class="not_authenticated">
+            <a href="#authentication">Войти</a>
+            <a href="#registration">Зарегистрироваться</a>
+        </div>
+        <br>
+        <div class="authenticated" hidden>
+            <p>Добро пожаловать, <a href="#user">%username!</a></p>
+            <a href="#exit">Выйти</a>
+        </div>
+    </div>
+</header>
+<div id="page_body" style="margin-left: 15px">
+    <div th:field="${movie.name}">
+        <h1 th:text="${movie.name}">MOVIE NAME</h1>
+        <h3 th:text="${movie.originalName}">MOVIE NAME</h3>
+        <!--        TODO:: место для фото-->
+        <!--        TODO:: блок с оценками-->
+        <div style="margin-left: 15px">
+            <p>Слоган: <span th:text="${movie.tagline == null}? '-' : ${movie.tagline}">TAGLINE</span></p>
+            <div th:switch="${movie.premiereDate != null}">
+                <p>Год выпуска:
+                    <a th:case="true" th:href="@{/collections/movies/year(year=${year})}" th:text="${year}"
+                       th:with="year=${#temporals.format(movie.premiereDate, 'yyyy')}">PREMIERE YEAR</a>
+                    <span th:case="false" th:text="Неизвестно">UNKNOWN </span>
+                </p>
+            </div>
+            <p>Дата выпуска: <span
+                    th:text="${movie.premiereDate == null} ? Неизвестно : ${#temporals.format(movie.premiereDate, 'dd.MM.yyyy')}">PREMIERE DATE</span>
+            </p>
+            <p>Дата выхода на стримингах: <span
+                    th:text="${movie.onlineRelease == null} ? Неизвестно : ${#temporals.format(movie.onlineRelease, 'dd.MM.yyyy')}">ONLINE RELEASE DATE</span>
+            </p>
+            <div th:switch="${movie.streaming != null}">
+                <p>Доступно на площадке:
+                    <a th:case="true" th:href="@{/collections/movies/streaming(id=${movie.streaming.id})}"
+                       th:text="${movie.streaming.name}">STREAMING NAME</a>
+                    <span th:case="false" th:text="Неизвестно">UNKNOWN </span>
+                </p>
+            </div>
+            <p>Длительность: <span
+                    th:text="${movie.runningTime} + ' мин.' ?: 'Неизвестно'">RUNNING TIME</span></p>
+            <p>Бюджет: <span
+                    th:text="${movie.budget == null} ? Неизвестно : '$' + ${#numbers.formatDecimal(movie.budget, 0, 'COMMA', 0, 'POINT')}">BUDGET</span>
+            </p>
+            <p>Сборы: <span
+                    th:text="${movie.boxOffice == null} ? Неизвестно : '$' + ${#numbers.formatDecimal(movie.boxOffice, 0, 'COMMA', 0, 'POINT')}">BOX OFFICE</span>
+            </p>
+            <p>Жанры: </p>
+            <div th:each="genre : *{movie.genres}">
+                <a th:href="@{/collections/movies/genre(id=${genre.id})}" th:text="${genre.name}">GENRE</a>
+            </div>
+            <div th:each="instance: ${movie.persons}">
+                <p th:text="${instance.key.name}"></p>
+                <div th:each="personEntry: ${instance.value}">
+                    <a th:href="@{/persons/{id}(id=${personEntry.id})}" th:text="${personEntry.name}"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--<div id="second_line">-->
+<!--    <div id="reviews" style="margin-left: 15px">-->
+<!--        <a>Оценка пользователей: </a><a>9/10</a>-->
+<!--        <br>-->
+<!--        <a>Оценка критиков: </a><a>22/10</a>-->
+<!--        <br>-->
+<!--        <a>Общая оценка: </a><a>15/10</a>-->
+<!--        <br>-->
+<!--        <a href="">Посмотреть отзывы</a>-->
+</body>
+</html>

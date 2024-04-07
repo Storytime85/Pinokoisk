@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${header}"></title>
+    <link rel="stylesheet" th:href="@{/styles.css}" type="text/css"/>
+</head>
+
+<body>
+<header class="page_top">
+    <div class="page_top_left">
+        <h1>Пинокоиск</h1>
+    </div>
+    <div class="page_top_middle">
+        <a th:href="@{/}">Главная</a>
+        <a th:href="@{/movies}">Фильмы</a>
+        <a th:href="@{/series}">Сериалы</a>
+        <a th:href="@{/collections}">Подборки </a>
+        <a class="active" th:href="@{/persons/all}">Персоны</a>
+        <a th:href="@{/search}">Поиск</a>
+    </div>
+    <div class="page_top_right">
+        <div class="not_authenticated">
+            <a href="#authentication">Войти</a>
+            <a href="#registration">Зарегистрироваться</a>
+        </div>
+        <br>
+        <div class="authenticated" hidden>
+            <p>Добро пожаловать, <a href="#user">%username!</a></p>
+            <a href="#exit">Выйти</a>
+        </div>
+    </div>
+</header>
+<div id="page_body" style="margin-left: 15px">
+    <h1 th:text="${header}">HEADER</h1>
+    <div id="movie_block" th:if="${(movies != null) || !movies.isEmpty()}">
+        <p>Фильмы:</p>
+        <div style="margin-left: 15px" th:each="movie : ${movies}">
+            <a th:href="@{/movies/{id} (id=${movie.id})}" th:text="${movie.name}">FILM NAME</a>
+            <span th:text="${movie.originalName}">SERIES ORIGINAL NAME</span>
+            <p>Жанры: </p>
+            <div th:each="genre : ${movie.genres}">
+                <span th:text="${genre.name}">MOVIE GENRE</span>
+            </div>
+            <div th:if="${enableProfessions}">
+                <p>Профессии: </p>
+                <div th:each="profession: ${movie.professions}">
+                    <span th:text="${profession.name}">PERSON PROFESSIONS</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="series_block" th:if="${(series != null) || !series.isEmpty()}">
+        <p>Сериалы:</p>
+        <div style="margin-left: 15px" th:each="one_series : ${series}">
+            <a th:href="@{/series/{id} (id=${one_series.id})}" th:text="${one_series.name}">SERIES NAME</a>
+            <span th:text="${one_series.originalName}">SERIES ORIGINAL NAME</span>
+            <p>Жанры: </p>
+            <div th:each="genre : ${one_series.genres}">
+                <span th:text="${genre.name}">SERIES GENRE</span>
+            </div>
+            <div th:if="${enableProfessions}">
+                <p>Профессии: </p>
+                <div th:each="profession: ${one_series.professions}">
+                    <span th:text="${profession.name}">PERSON PROFESSIONS</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--    <h1 th:text="${header}">HEADER</h1>-->
+    <!--    <div style="margin-left: 15px; margin-bottom: 15px; background:white" th:each="person: ${persons}">-->
+    <!--        <a th:href="@{/persons/{id}(id=${person.id})}" th:text="${person.name}">NAME</a>-->
+    <!--        <div style="white-space: nowrap;" th:each="profession: ${person.professions}">-->
+    <!--            <a th:text="${profession.name}">PROFESSION</a>-->
+    <!--        </div>-->
+    <!--    </div>-->
+
+</div>
+</body>
+</html>

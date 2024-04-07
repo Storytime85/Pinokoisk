@@ -1,0 +1,64 @@
+<!--TODO: доделать-->
+<!DOCTYPE html>
+<html lang="ru" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Pinokoisk welcomes you!</title>
+    <link rel="stylesheet" th:href="@{/styles.css}" type="text/css"/>
+</head>
+
+<body>
+<header class="page_top">
+    <div class="page_top_left">
+        <div>
+            <h1>Пинокоиск</h1>
+        </div>
+    </div>
+    <div class="page_top_middle">
+        <a th:href="@{/}">Главная</a>
+        <a th:href="@{/movies}">Фильмы</a>
+        <a th:href="@{/series}">Сериалы</a>
+        <a th:href="@{/collections}">Подборки</a>
+        <a th:href="@{/persons/all}">Персоны</a>
+        <a th:href="@{/search}">Поиск</a>
+    </div>
+    <div class="page_top_right">
+        <div class="not_authenticated">
+            <a href="#authentication">Войти</a>
+            <a href="#registration">Зарегистрироваться</a>
+        </div>
+        <br>
+        <div class="authenticated" hidden>
+            <h3>Добро пожаловать, <a href="#user">%username!</a></h3>
+            <a href="#exit">Выйти</a>
+        </div>
+    </div>
+</header>
+
+<div id="page_body">
+    <div id="page_content">
+        <h1>Имя юзера</h1>
+        <p>Дата регистрации: 02.28.1488</p>
+        <p>Статус: критик</p>
+        <p>О себе:</p>
+        <p>Ты съешь свою мать, я съем свою мать.</p>
+    </div>
+    <div>
+        <h2>Любимые фильмы</h2>
+        <a href="">Название фильма</a>
+    </div>
+    <div>
+        <h2>Список рецензий</h2>
+        <h3>Название фильма</h3>
+        <p>Оценка: 14/88</p>
+        <a>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+            industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+            scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into
+            electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of
+            Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like
+            Aldus PageMaker including versions of Lorem Ipsum.</a>
+    </div>
+</div>
+</body>
+</html>

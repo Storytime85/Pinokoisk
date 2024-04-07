@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Страница персоны NAME</title>
+    <link rel="stylesheet" th:href="@{/styles.css}" type="text/css"/>
+</head>
+
+<body>
+<header class="page_top">
+    <div class="page_top_left">
+        <h1>Пинокоиск</h1>
+    </div>
+    <div class="page_top_middle">
+        <a th:href="@{/}">Главная</a>
+        <a th:href="@{/movies}">Фильмы</a>
+        <a th:href="@{/series}">Сериалы</a>
+        <a th:href="@{/collections}">Подборки</a>
+        <a th:href="@{/persons/all}">Персоны</a>
+        <a th:href="@{/search}">Поиск</a>
+    </div>
+    <div class="page_top_right">
+        <div class="not_authenticated">
+            <a href="#authentication">Войти</a>
+            <a href="#registration">Зарегистрироваться</a>
+        </div>
+        <br>
+        <div class="authenticated" hidden>
+            <p>Добро пожаловать, <a href="#user">%username!</a></p>
+            <a href="#exit">Выйти</a>
+        </div>
+    </div>
+</header>
+
+<div id="page_body">
+    <div style="margin-left: 15px" th:field="${person.name}">
+        <h3 th:text="${person.name}">NAME</h3>
+        <p>Карьера:</p>
+        <div th:each="profession, iterStat : *{person.professions}">
+            <a th:href="@{/collections/pp(person=${person.id},profession=${profession.id})}"
+               th:text="${profession.name}">PROFESSION</a>
+            <span th:text="${!iterStat.last ? ', ' : ''}"></span>
+        </div>
+        <div th:switch="${person.birthday != null}">
+            <p>Год рождения:
+                <a th:case="true" th:href="@{/persons/year(year=${year})}" th:text="${year}"
+                   th:with="year=${#temporals.format(person.birthday, 'yyyy')}">BIRTH YEAR</a>
+                <span th:case="false" th:text="Неизвестно">UNKNOWN </span>
+            </p>
+        </div>
+        <div th:switch="${person.birthday != null}">
+            <p>Дата рождения:
+                <a th:case="true" th:href="@{/persons/birthday(birthday=${person.birthday})}"
+                   th:text="${birthday}"
+                   th:with="birthday=${#temporals.format(person.birthday, 'dd.MM.yyyy')}">BIRTHDAY</a>
+                <span th:case="false" th:text="Неизвестно">UNKNOWN </span>
+            </p>
+        </div>
+        <div th:switch="${person.birthplace != null}">
+            <p>Место рождения:
+                <a th:case="true" th:href="@{/persons/birthplace(birthplace=${person.birthplace})}"
+                   th:text="${person.birthplace}">BIRTHDAY</a>
+                <span th:case="false" th:text="Неизвестно">UNKNOWN </span>
+            </p>
+        </div>
+        <p>Всего фильмов/сериалов: <a th:href="@{/collections/shows(id=${person.id})}"
+                                      th:text="${person.countOfShows()}">COUNT</a></p>
+
+    </div>
+
+    <!--        <div id="header">-->
+    <!--            <h1>Имя Фамилия</h1>-->
+    <!--            <a href="">Добавить в любимые</a>-->
+    <!--            <a href="">Убрать из любимых</a>-->
+    <!--        </div>-->
+    <!--        <div id = "photo" style="width: 45%; float: left; margin-left: 15px">-->
+    <!--            <img src="../../static/killmeplz.jpg">-->
+    <!--        </div>-->
+</div>
+</body>
+</html>

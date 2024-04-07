@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Фильм/Сериал NAME</title>
+    <link rel="stylesheet" th:href="@{/styles.css}" type="text/css"/>
+</head>
+
+<body>
+<header class="page_top">
+    <div class="page_top_left">
+        <h1>Пинокоиск</h1>
+    </div>
+    <div class="page_top_middle">
+        <a th:href="@{/}">Главная</a>
+        <a th:href="@{/movies}">Фильмы</a>
+        <a th:href="@{/series}">Сериалы</a>
+        <a th:href="@{/collections}">Подборки</a>
+        <a th:href="@{/persons/all}">Персоны</a>
+        <a th:href="@{/search}">Поиск</a>
+    </div>
+    <div class="page_top_right">
+        <div class="not_authenticated">
+            <a href="#authentication">Войти</a>
+            <a href="#registration">Зарегистрироваться</a>
+        </div>
+        <br>
+        <div class="authenticated" hidden>
+            <p>Добро пожаловать, <a href="#user">%username!</a></p>
+            <a href="#exit">Выйти</a>
+        </div>
+    </div>
+</header>
+<div th:field="${one_series.name}">
+    <h1 th:text="${one_series.name}">SERIES NAME</h1>
+    <h3 th:text="${one_series.originalName}">SERIES NAME</h3>
+    <!--        TODO:: место для фото-->
+    <!--        TODO:: блок с оценками-->
+    <div style="margin-left: 15px">
+        <p>Слоган: <span th:text="${one_series.tagline == null}? '-' : ${one_series.tagline}">TAGLINE</span></p>
+        <div th:switch="${one_series.premiereDate != null}">
+            <p>Год выпуска:
+                <a th:case="true" th:href="@{/collections/series/year(year=${year})}" th:text="${year}"
+                   th:with="year=${#temporals.format(one_series.premiereDate, 'yyyy')}">PREMIERE YEAR</a>
+                <span th:case="false" th:text="Неизвестно">UNKNOWN </span>
+            </p>
+        </div>
+        <p>Дата выпуска: <span
+                th:text="${one_series.premiereDate == null} ? Неизвестно : ${#temporals.format(one_series.premiereDate, 'dd.MM.yyyy')}">PREMIERE DATE</span>
+        </p>
+        <div th:switch="${one_series.streaming != null}">
+            <p>Доступно на площадке:
+                <a th:case="true" th:href="@{/collections/series/streaming(id=${one_series.streaming.id})}"
+                   th:text="${one_series.streaming.name}">STREAMING NAME</a>
+                <span th:case="false" th:text="Неизвестно">UNKNOWN </span>
+            </p>
+        </div>
+        <p>Количество сезонов: <span
+                th:text="${one_series.seasonCount} ?: 'Неизвестно'">RUNNING TIME</span></p>
+        <p>Количество серий на сезон: <span
+                th:text="${one_series.seriesCount} ?: 'Неизвестно'">RUNNING TIME</span></p>
+        <p>Всего серий: <span
+                th:text="${one_series.seriesCount*one_series.seasonCount} ?: 'Неизвестно'">RUNNING TIME</span></p>
+        <p>Средняя длительность одной серии: <span
+                th:text="${one_series.avgRunningTime} + ' мин.' ?: 'Неизвестно'">RUNNING TIME</span></p>
+        <p>Общая длительность сериала: <span
+                th:text="${one_series.avgRunningTime * one_series.seriesCount} + ' мин.' ?: 'Неизвестно'">RUNNING TIME</span>
+        </p>
+        <p>Бюджет на эпизод: <span
+                th:text="${one_series.budgetOnEpisode == null} ? Неизвестно : '$ ' + ${#numbers.formatDecimal(one_series.budgetOnEpisode, 0, 'COMMA', 0, 'POINT')}">BUDGET</span>
+        </p>
+        <div th:switch="${one_series.budgetOnEpisode == null || one_series.seriesCount ==null}">
+            <p>Общий бюджет на сериал:
+            <span th:case="true">Неизвестно</span>
+            <span th:case="false" th:text="'$ ' + ${#numbers.formatDecimal(one_series.budgetOnEpisode * one_series.seriesCount, 0, 'COMMA', 0, 'POINT')}">OVERALL BUDGET</span>
+            </p>
+        </div>
+
+        <p>Жанры: </p>
+        <div th:each="genre : *{one_series.genres}">
+            <a th:href="@{/collections/series/genre(id=${genre.id})}" th:text="${genre.name}">GENRE</a>
+        </div>
+        <div th:each="instance: ${one_series.persons}">
+            <p th:text="${instance.key.name}"></p>
+            <div th:each="personEntry: ${instance.value}">
+                <a th:href="@{/persons/{id}(id=${personEntry.id})}" th:text="${personEntry.name}"></a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
