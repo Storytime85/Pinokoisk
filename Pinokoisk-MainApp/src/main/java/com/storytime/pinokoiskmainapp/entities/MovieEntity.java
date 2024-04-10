@@ -1,6 +1,7 @@
 package com.storytime.pinokoiskmainapp.entities;
 
 import com.storytime.pinokoiskmainapp.entities.links.PersonMovieProfessionLinkEntity;
+import com.storytime.pinokoiskmainapp.entities.reviews.ReviewOnMovieEntity;
 import com.storytime.pinokoiskmainapp.entities.simple.GenreEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -44,8 +45,9 @@ public class MovieEntity extends Show {
     )
     @NotNull
     private List<GenreEntity> genres;
-    @OneToMany(mappedBy = "movie", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @OneToMany(mappedBy = "movie")
     private List<PersonMovieProfessionLinkEntity> pmpl;
-
+    @OneToMany(mappedBy = "id")
+    private List<ReviewOnMovieEntity> review;
 
 }

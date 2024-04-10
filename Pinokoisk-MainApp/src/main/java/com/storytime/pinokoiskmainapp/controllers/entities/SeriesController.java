@@ -1,7 +1,11 @@
 package com.storytime.pinokoiskmainapp.controllers.entities;
 
 import com.storytime.pinokoiskmainapp.dto.SeriesDto;
+import com.storytime.pinokoiskmainapp.entities.reviews.ReviewEntity;
+import com.storytime.pinokoiskmainapp.service.ReviewService;
 import com.storytime.pinokoiskmainapp.service.SeriesService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,8 +20,11 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 public class SeriesController {
     private final SeriesService seriesService;
 
-    public SeriesController(SeriesService seriesService) {
+    private final ReviewService reviewService;
+
+    public SeriesController(SeriesService seriesService, ReviewService reviewService) {
         this.seriesService = seriesService;
+        this.reviewService = reviewService;
     }
 
     @GetMapping

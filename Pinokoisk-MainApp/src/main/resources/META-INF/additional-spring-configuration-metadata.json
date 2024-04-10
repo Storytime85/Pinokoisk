@@ -9,6 +9,11 @@
       "name": "redis.config.port",
       "type": "java.lang.Integer",
       "description": "Redis cluster port."
+    },
+    {
+      "name": "ceph.config.hosts",
+      "type": "java.lang.String",
+      "description": "Host URL for CEPH cluster."
     }
   ]
 }

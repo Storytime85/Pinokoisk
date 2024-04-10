@@ -1,6 +1,8 @@
 package com.storytime.pinokoiskmainapp.entities;
 
 import com.storytime.pinokoiskmainapp.entities.links.PersonSeriesProfessionLinkEntity;
+import com.storytime.pinokoiskmainapp.entities.reviews.ReviewOnMovieEntity;
+import com.storytime.pinokoiskmainapp.entities.reviews.ReviewOnSeriesEntity;
 import com.storytime.pinokoiskmainapp.entities.simple.GenreEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -38,13 +40,13 @@ public class SeriesEntity extends Show {
             joinColumns = {@JoinColumn(name = "series", referencedColumnName = "series_id")},
             inverseJoinColumns = {@JoinColumn(name = "genre", referencedColumnName = "genre_id")}
     )
-    @NotNull
     private List<GenreEntity> genres;
 
     @OneToMany(mappedBy = "series", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<PersonSeriesProfessionLinkEntity> pspl;
 
-
+    @OneToMany(mappedBy = "id")
+    private List<ReviewOnSeriesEntity> review;
     //Todo: Постер
 
     //TODO: Добавить функционал для отдельных серий

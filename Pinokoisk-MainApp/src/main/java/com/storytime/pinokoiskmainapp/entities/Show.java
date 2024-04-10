@@ -34,7 +34,7 @@ public abstract class Show {
     private LocalDateTime premiereDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "age_restrictions")
+    @JoinColumn(name = "age_restrictions", nullable = true)
     private AgeRestrictionsEntity ageRestrictions;
     @Column
     private String poster;

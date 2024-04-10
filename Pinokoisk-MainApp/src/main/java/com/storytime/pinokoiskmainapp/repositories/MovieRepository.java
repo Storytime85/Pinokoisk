@@ -1,6 +1,5 @@
 package com.storytime.pinokoiskmainapp.repositories;
 
-
 import com.storytime.pinokoiskmainapp.entities.MovieEntity;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
