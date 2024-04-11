@@ -16,7 +16,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
     @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, value = ReviewRepository.class))
 public class PinokoiskApplication {
 
-
     public static void main(String[] args) {
         SpringApplication.run(PinokoiskApplication.class, args);
     }

@@ -35,5 +35,5 @@ public class ReviewOnMovieEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user", nullable = false)
-    private UserEntity userEntity;
+    private UserEntity user;
 }

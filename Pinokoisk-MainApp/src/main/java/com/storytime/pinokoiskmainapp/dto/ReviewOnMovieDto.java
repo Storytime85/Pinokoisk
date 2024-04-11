@@ -10,7 +10,7 @@ import org.apache.catalina.User;
 @NoArgsConstructor
 public class ReviewOnMovieDto {
     private Long id;
-    private short rating;
+    private Short rating;
     private ReviewDto review;
     private Long movieId;
     private String movieName;

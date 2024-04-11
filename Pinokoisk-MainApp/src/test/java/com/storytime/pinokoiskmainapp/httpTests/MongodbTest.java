@@ -1,6 +1,7 @@
 package com.storytime.pinokoiskmainapp.httpTests;
 
 import com.storytime.pinokoiskmainapp.entities.reviews.ReviewEntity;
+import com.storytime.pinokoiskmainapp.service.ReviewContentService;
 import com.storytime.pinokoiskmainapp.service.ReviewService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -19,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest
 public class MongodbTest {
     @Autowired
-    private ReviewService reviewService;
+    private ReviewContentService reviewService;
 
     @Test
     public void readEntity_expectExistsAndValid(){

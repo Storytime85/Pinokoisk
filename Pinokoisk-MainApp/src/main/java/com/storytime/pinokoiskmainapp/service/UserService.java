@@ -11,14 +11,12 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UserService {
-    Optional<UserEntity> findUser(Long reviewId);
-    UserDto getUser(Long reviewId);
-    Optional<List<UserDto>> findAllUsers();
-    Optional<List<ReviewOnMovieDto>> getAllUsers();
-    Optional<List<UserDto>> findAllUsersWithReviewsOnMovie(Long userId);
-    Optional<List<ReviewOnMovieDto>> getAllUsersWithReviewsOnMovie(Long userId);
-    Optional<List<UserDto>> findAllUsersWithReviewsOnSeries(Long userId);
-    Optional<List<UserDto>> getAllUsersWithReviewsOnSeries(Long userId);
+    Optional<UserEntity> findUser(Long userId);
+    UserDto getUser(Long userId);
+    Optional<List<UserEntity>> findAllUsersWithReviewsOnMovie(Long movieId);
+    List<UserDto> getAllUsersWithReviewsOnMovie(Long movieId);
+    Optional<List<UserEntity>> findAllUsersWithReviewsOnSeries(Long seriesId);
+    List<UserDto> getAllUsersWithReviewsOnSeries(Long seriesId);
 
     //TODO:: implementation + create + delete + update
 }

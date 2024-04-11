@@ -4,7 +4,7 @@ import com.storytime.pinokoiskmainapp.dto.simple.AgeRestrictionsDto;
 import com.storytime.pinokoiskmainapp.dto.simple.GenreDto;
 import com.storytime.pinokoiskmainapp.dto.simple.ProfessionDto;
 import com.storytime.pinokoiskmainapp.dto.simple.StreamingDto;
-import com.storytime.pinokoiskmainapp.service.impl.DictionaryService;
+import com.storytime.pinokoiskmainapp.service.impl.DictionaryServiceImpl;
 import lombok.AccessLevel;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,22 +17,22 @@ import java.util.stream.Collectors;
 @Component
 public class DictionariesFromDb {
     @Getter(AccessLevel.NONE)
-    private final DictionaryService dictionaryService;
+    private final DictionaryServiceImpl dictionaryServiceImpl;
     private final Map<Long, String> ageRestrictions;
     private final Map<Long, String> genres;
     private final Map<Long, String> professions;
     private final Map<Long, String> streamings;
 
     @Autowired
-    public DictionariesFromDb(DictionaryService dictionaryService) {
-        this.dictionaryService = dictionaryService;
-        ageRestrictions = dictionaryService.getAllRestrictions().stream().
+    public DictionariesFromDb(DictionaryServiceImpl dictionaryServiceImpl) {
+        this.dictionaryServiceImpl = dictionaryServiceImpl;
+        ageRestrictions = dictionaryServiceImpl.getAllRestrictions().stream().
                 collect(Collectors.toMap(AgeRestrictionsDto::getId, AgeRestrictionsDto::getName));
-        genres = dictionaryService.getAllGenres().stream().
+        genres = dictionaryServiceImpl.getAllGenres().stream().
                 collect(Collectors.toMap(GenreDto::getId, GenreDto::getName));
-        professions = dictionaryService.getAllProfessions().stream().
+        professions = dictionaryServiceImpl.getAllProfessions().stream().
                 collect(Collectors.toMap(ProfessionDto::getId, ProfessionDto::getName));
-        streamings = dictionaryService.getAllStreamings().stream().
+        streamings = dictionaryServiceImpl.getAllStreamings().stream().
                 collect(Collectors.toMap(StreamingDto::getId, StreamingDto::getName));
 
     }

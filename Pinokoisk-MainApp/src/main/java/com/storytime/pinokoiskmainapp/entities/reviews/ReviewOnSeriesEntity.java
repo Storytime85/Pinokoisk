@@ -1,6 +1,7 @@
 package com.storytime.pinokoiskmainapp.entities.reviews;
 
 import com.storytime.pinokoiskmainapp.entities.MovieEntity;
+import com.storytime.pinokoiskmainapp.entities.SeriesEntity;
 import com.storytime.pinokoiskmainapp.entities.UserEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -31,9 +32,9 @@ public class ReviewOnSeriesEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "series", nullable = false)
-    private MovieEntity movie;
+    private SeriesEntity series;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user", nullable = false)
-    private UserEntity userEntity;
+    private UserEntity user;
 }

@@ -1,51 +1,57 @@
 package com.storytime.pinokoiskmainapp.service.impl;
 
-import com.storytime.pinokoiskmainapp.dto.ReviewOnMovieDto;
 import com.storytime.pinokoiskmainapp.dto.UserDto;
 import com.storytime.pinokoiskmainapp.entities.UserEntity;
+import com.storytime.pinokoiskmainapp.mappers.Mapper;
+import com.storytime.pinokoiskmainapp.mappers.impl.UserMapper;
+import com.storytime.pinokoiskmainapp.repositories.UserRepository;
 import com.storytime.pinokoiskmainapp.service.UserService;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Service
+@AllArgsConstructor
 public class UserServiceImpl implements UserService {
+    private final UserRepository userRepository;
+    private final Mapper<UserEntity,UserDto> userMapper;
+
     @Override
-    public Optional<UserEntity> findUser(Long reviewId) {
-        return Optional.empty();
+    public Optional<UserEntity> findUser(Long userId) {
+        return userRepository.findById(userId);
     }
 
     @Override
-    public UserDto getUser(Long reviewId) {
-        return null;
+    public UserDto getUser(Long userId) {
+        return findUser(userId).map(userMapper::mapTo).orElse(null);
+    }
+
+
+    @Override
+    public Optional<List<UserEntity>> findAllUsersWithReviewsOnMovie(Long movieId) {
+        return userRepository.findUserEntitiesByReviewsWithMovieId(movieId);
     }
 
     @Override
-    public Optional<List<UserDto>> findAllUsers() {
-        return Optional.empty();
+    public List<UserDto> getAllUsersWithReviewsOnMovie(Long movieId) {
+        return findAllUsersWithReviewsOnMovie(movieId).map(
+                (e) -> e.stream().map(userMapper::mapTo).toList()
+        ).orElse(new ArrayList<>());
     }
 
     @Override
-    public Optional<List<ReviewOnMovieDto>> getAllUsers() {
-        return Optional.empty();
+    public Optional<List<UserEntity>> findAllUsersWithReviewsOnSeries(Long seriesId) {
+        return userRepository.findUserEntitiesByReviewsWithSeriesId(seriesId);
     }
 
     @Override
-    public Optional<List<UserDto>> findAllUsersWithReviewsOnMovie(Long userId) {
-        return Optional.empty();
+    public List<UserDto> getAllUsersWithReviewsOnSeries(Long seriesId) {
+        return findAllUsersWithReviewsOnSeries(seriesId).map(
+                (e) -> e.stream().map(userMapper::mapTo).toList()
+        ).orElse(new ArrayList<>());
     }
 
-    @Override
-    public Optional<List<ReviewOnMovieDto>> getAllUsersWithReviewsOnMovie(Long userId) {
-        return Optional.empty();
-    }
-
-    @Override
-    public Optional<List<UserDto>> findAllUsersWithReviewsOnSeries(Long userId) {
-        return Optional.empty();
-    }
-
-    @Override
-    public Optional<List<UserDto>> getAllUsersWithReviewsOnSeries(Long userId) {
-        return Optional.empty();
-    }
 }

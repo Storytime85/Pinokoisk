@@ -24,7 +24,7 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class DictionaryService implements AgeRestrictionsService, GenreService, ProfessionService, StreamingService {
+public class DictionaryServiceImpl implements AgeRestrictionsService, GenreService, ProfessionService, StreamingService {
     private final AgeRestrictionsRepository ageRestrictionsRepository;
     private final GenreRepository genreRepository;
     private final ProfessionRepository professionRepository;

@@ -1,10 +1,15 @@
 package com.storytime.pinokoiskmainapp.service.impl;
 
+import com.storytime.pinokoiskmainapp.dto.ReviewDto;
 import com.storytime.pinokoiskmainapp.dto.ReviewOnMovieDto;
 import com.storytime.pinokoiskmainapp.dto.ReviewOnSeriesDto;
 import com.storytime.pinokoiskmainapp.entities.reviews.ReviewEntity;
 import com.storytime.pinokoiskmainapp.entities.reviews.ReviewOnMovieEntity;
 import com.storytime.pinokoiskmainapp.entities.reviews.ReviewOnSeriesEntity;
+import com.storytime.pinokoiskmainapp.mappers.Mapper;
+import com.storytime.pinokoiskmainapp.mappers.impl.ReviewMapper;
+import com.storytime.pinokoiskmainapp.mappers.impl.ReviewOnMovieMapper;
+import com.storytime.pinokoiskmainapp.mappers.impl.ReviewOnSeriesMapper;
 import com.storytime.pinokoiskmainapp.repositories.reviews.ReviewOnMovieRepository;
 import com.storytime.pinokoiskmainapp.repositories.reviews.ReviewOnSeriesRepository;
 import com.storytime.pinokoiskmainapp.repositories.reviews.ReviewRepository;
@@ -12,89 +17,67 @@ import com.storytime.pinokoiskmainapp.service.ReviewService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 @AllArgsConstructor
 public class ReviewServiceImpl implements ReviewService {
-    private final ReviewRepository reviewRepository;
-    private final ReviewOnMovieRepository reviewOnMovierepository;
+    private final ReviewOnMovieRepository reviewOnMovieRepository;
     private final ReviewOnSeriesRepository reviewOnSeriesRepository;
 
+    private final Mapper<ReviewOnMovieEntity,ReviewOnMovieDto> reviewOnMovieMapper;
+    private final Mapper<ReviewOnSeriesEntity,ReviewOnSeriesDto> reviewOnSeriesMapper;
 
-    @Override
-    public Optional<ReviewOnMovieEntity> findReviewOnMovie(Long reviewId) {
-        return Optional.empty();
-    }
-
-    @Override
-    public ReviewOnMovieDto getReviewOnMovie(Long reviewId) {
-        return null;
-    }
-
-    @Override
-    public Optional<List<ReviewOnMovieEntity>> findAllReviewsOnMovies() {
-        return Optional.empty();
-    }
-
-    @Override
-    public Optional<List<ReviewOnMovieDto>> getAllReviewsOnMovies() {
-        return Optional.empty();
-    }
 
     @Override
     public Optional<List<ReviewOnMovieEntity>> findAllReviewsOnMoviesByUser(Long userId) {
-        return Optional.empty();
+        return reviewOnMovieRepository.findAllByUserId(userId);
     }
 
     @Override
-    public Optional<List<ReviewOnMovieDto>> getAllReviewsOnMoviesByUser(Long userId) {
-        return Optional.empty();
+    public List<ReviewOnMovieDto> getAllReviewsOnMoviesByUser(Long userId) {
+        return findAllReviewsOnMoviesByUser(userId).map(
+                (e) -> e.stream().map(reviewOnMovieMapper::mapTo).toList()
+        ).orElse(new ArrayList<>());
     }
 
     @Override
-    public Optional<List<ReviewOnMovieEntity>> findAllReviewsOnMovieByMovie(Long movieId) {
-        return Optional.empty();
+    public Optional<List<ReviewOnMovieEntity>> findAllReviewsOnMovie(Long movieId) {
+        return reviewOnMovieRepository.findAllByMovieId(movieId);
     }
 
     @Override
-    public Optional<List<ReviewOnMovieDto>> getAllReviewsOnMovieByMovie(Long movieId) {
-        return Optional.empty();
-    }
-
-    @Override
-    public Optional<ReviewOnSeriesEntity> findReviewOnSeries(Long reviewId) {
-        return Optional.empty();
-    }
-
-    @Override
-    public Optional<List<ReviewOnSeriesEntity>> findAllReviewsOnSeries() {
-        return Optional.empty();
-    }
-
-    @Override
-    public Optional<List<ReviewOnSeriesDto>> getAllReviewsOnSeries(Long seriesId) {
-        return Optional.empty();
+    public List<ReviewOnMovieDto> getAllReviewsOnMovie(Long movieId) {
+        return findAllReviewsOnMovie(movieId).map(
+                (e) -> e.stream().map(reviewOnMovieMapper::mapTo).toList()
+        ).orElse(new ArrayList<>());
     }
 
     @Override
     public Optional<List<ReviewOnSeriesEntity>> findAllReviewsOnSeriesByUser(Long userId) {
-        return Optional.empty();
+        return reviewOnSeriesRepository.findAllByUserId(userId);
     }
 
     @Override
-    public Optional<List<ReviewOnSeriesDto>> getAllReviewsOnSeriesByUser(Long userId) {
-        return Optional.empty();
+    public List<ReviewOnSeriesDto> getAllReviewsOnSeriesByUser(Long userId) {
+        return findAllReviewsOnSeries(userId).map(
+                (e) -> e.stream().map(reviewOnSeriesMapper::mapTo).toList()
+        ).orElse(new ArrayList<>());
     }
 
     @Override
-    public Optional<List<ReviewOnSeriesEntity>> findAllReviewsOnSeriesBySeries(Long seriesId) {
-        return Optional.empty();
+    public Optional<List<ReviewOnSeriesEntity>> findAllReviewsOnSeries(Long seriesId) {
+        return reviewOnSeriesRepository.findAllBySeriesId(seriesId);
     }
 
     @Override
-    public Optional<List<ReviewOnSeriesDto>> getAllReviewsOnSeriesBySeries(Long seriesId) {
-        return Optional.empty();
+    public List<ReviewOnSeriesDto> getAllReviewsOnSeries(Long seriesId) {
+        return findAllReviewsOnSeries(seriesId).map(
+                (e) -> e.stream().map(reviewOnSeriesMapper::mapTo).toList()
+        ).orElse(new ArrayList<>());
     }
+
+
 }

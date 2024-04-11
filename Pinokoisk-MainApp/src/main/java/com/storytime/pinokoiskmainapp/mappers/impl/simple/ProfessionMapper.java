@@ -17,7 +17,6 @@ public class ProfessionMapper implements Mapper<ProfessionEntity, ProfessionDto>
 
     @Override
     public ProfessionEntity mapFrom(ProfessionDto professionDto) {
-        //TODO: доделать
         return null;
     }
 }
