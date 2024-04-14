@@ -1,5 +1,6 @@
 package com.storytime.pinokoiskmainapp.mappers.impl;
 
+import com.storytime.pinokoiskmainapp.dto.ReviewDto;
 import com.storytime.pinokoiskmainapp.dto.ReviewOnMovieDto;
 import com.storytime.pinokoiskmainapp.entities.reviews.ReviewOnMovieEntity;
 import com.storytime.pinokoiskmainapp.mappers.Mapper;
@@ -24,7 +25,7 @@ public class ReviewOnMovieMapper implements Mapper<ReviewOnMovieEntity, ReviewOn
                 reviewOnMovieEntity.getMovie().getId(),
                 reviewOnMovieEntity.getMovie().getName(),
                 reviewOnMovieEntity.getUser().getId(),
-                reviewOnMovieEntity.getUser().getUserName()
+                reviewOnMovieEntity.getUser().getUsername()
         );
     }
 

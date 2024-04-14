@@ -21,7 +21,7 @@ public class ReviewContentServiceImpl implements ReviewContentService {
 
     @Override
     public ReviewDto getReviewText(String reviewId) {
-        return findReviewText(reviewId).map(reviewMapper::mapTo).orElse(null);
+        return reviewId == null ? null :findReviewText(reviewId).map(reviewMapper::mapTo).orElse(null);
     }
 
 }

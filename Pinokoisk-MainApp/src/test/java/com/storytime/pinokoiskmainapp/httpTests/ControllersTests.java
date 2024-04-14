@@ -1,5 +1,6 @@
 package com.storytime.pinokoiskmainapp.httpTests;
 
+import com.storytime.pinokoiskmainapp.service.ReviewService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,8 @@ public class ControllersTests {
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
     private MockMvc mockMvc;
+    @Autowired
+    private ReviewService reviewService;
 
     @Test
     public void testHomeRedirect_expect200() throws Exception {
@@ -80,5 +83,6 @@ public class ControllersTests {
                         containsString("<!DOCTYPE html>")
                 ));
     }
+
 
 }

@@ -47,7 +47,26 @@
          th:if="${! #lists.isEmpty(series)}">
         <p th:text="${one_series.name}">NAME</p>
         <p th:text="${one_series.originalName}">NAME</p>
-        <!--        TODO:: тут будут оценки-->
+        <div>
+            <div th:if="${userRatings.get(one_series.id) == null}">
+                <p>Оценок пользователей нет</p>
+            </div>
+            <div th:unless="${userRatings.get(one_series.id)} == null">
+                <p>Рейтинг пользователей: <span th:text="${userRatings.get(one_series.id).avgRate}">AVG USER RATING</span>
+                    , всего оценок: <span th:text="${userRatings.get(one_series.id).count}">USER REVIEWS COUNT</span></p>
+            </div>
+            <div th:if="${criticRatings.get(one_series.id) == null}">
+                <p>Оценок критиков нет</p>
+            </div>
+            <div th:unless="${criticRatings.get(one_series.id) == null}">
+                <p>Рейтинг критиков: <span th:text="${criticRatings.get(one_series.id).avgRate}"> AVG CRITICS RATING</span>
+                    , всего оценок: <span th:text="${criticRatings.get(one_series.id).count}">CRITIC REVIEWS COUNT</span></p>
+            </div>
+            <div th:if="${allRatings.get(one_series.id) != null}">
+                <p>Общий рейтинг: <span th:text="${allRatings.get(one_series.id).avgRate}">AVG RATING</span>, всего оценок:
+                    <span th:text="${allRatings.get(one_series.id).count}"> AVG COUNT</span></p>
+            </div>
+        </div>
         <a th:href="@{/series/{id}(id=${one_series.id})}">Подробности</a>
     </div>
 </div>

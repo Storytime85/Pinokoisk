@@ -15,7 +15,6 @@
             <h1>Пинокоиск</h1>
         </div>
         <div class="page_top_middle">
-            <!--                TODO::Логика для кнопки сериалы/фильмы-->
             <a th:href="@{/}">Главная</a>
             <a class="active" th:href="@{/movies}">Фильмы</a>
             <a th:href="@{/series}">Сериалы</a>
@@ -46,7 +45,26 @@
          th:if="${not #lists.isEmpty(movies)}">
         <p th:text="${movie.name}">NAME</p>
         <p th:text="${movie.originalName}">NAME</p>
-        <!--        TODO:: тут будут оценки-->
+        <div>
+            <div th:if="${userRatings.get(movie.id) == null}">
+                <p>Оценок пользователей нет</p>
+            </div>
+            <div th:unless="${userRatings.get(movie.id)} == null">
+                <p>Рейтинг пользователей: <span th:text="${userRatings.get(movie.id).avgRate}">AVG USER RATING</span>
+                    , всего оценок: <span th:text="${userRatings.get(movie.id).count}">USER REVIEWS COUNT</span></p>
+            </div>
+            <div th:if="${criticRatings.get(movie.id) == null}">
+                <p>Оценок критиков нет</p>
+            </div>
+            <div th:unless="${criticRatings.get(movie.id) == null}">
+                <p>Рейтинг критиков: <span th:text="${criticRatings.get(movie.id).avgRate}"> AVG CRITICS RATING</span>
+                    , всего оценок: <span th:text="${criticRatings.get(movie.id).count}">CRITIC REVIEWS COUNT</span></p>
+            </div>
+            <div th:if="${allRatings.get(movie.id) != null}">
+                <p>Общий рейтинг: <span th:text="${allRatings.get(movie.id).avgRate}">AVG RATING</span>, всего оценок:
+                <span th:text="${allRatings.get(movie.id).count}"> AVG COUNT</span></p>
+            </div>
+        </div>
         <a th:href="@{/movies/{id}(id=${movie.id})}">Подробности</a>
     </div>
 </div>

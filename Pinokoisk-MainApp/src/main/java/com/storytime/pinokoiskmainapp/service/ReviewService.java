@@ -1,36 +1,36 @@
 package com.storytime.pinokoiskmainapp.service;
 
-import com.storytime.pinokoiskmainapp.dto.ReviewDto;
+import com.storytime.pinokoiskmainapp.dto.AvgRating;
+import com.storytime.pinokoiskmainapp.dto.FullReviewDto;
 import com.storytime.pinokoiskmainapp.dto.ReviewOnMovieDto;
 import com.storytime.pinokoiskmainapp.dto.ReviewOnSeriesDto;
-import com.storytime.pinokoiskmainapp.entities.reviews.ReviewEntity;
 import com.storytime.pinokoiskmainapp.entities.reviews.ReviewOnMovieEntity;
 import com.storytime.pinokoiskmainapp.entities.reviews.ReviewOnSeriesEntity;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
-
 public interface ReviewService {
+//    Optional<List<ReviewOnMovieEntity>> findAllReviewsOnMoviesByUser(Long userId);
+    Optional<List<ReviewOnMovieEntity>> findAllReviewsOnMovieByUserRole(Long movieId, String userRole);
+    List<FullReviewDto> getAllReviewsOnMovieByCritics(Long movieId);
+    List<FullReviewDto> getAllReviewsOnMovieByUsers(Long movieId);
+    Optional<AvgRating> findAvgRatingsByMovieAndUserRole(Long movieId, String userRole);
+    AvgRating getRatingsByMovieAndCritics(Long movieId);
+    AvgRating getRatingsByMovieAndUsers(Long movieId);
+    Map<Long,AvgRating> findAllRatingsWithMovieByUserRole(String userRole);
+    Map<Long,AvgRating> getAllRatingsWithMovieByUserRole(String userRole);
 
-//    Optional<ReviewOnMovieEntity> findReviewOnMovie(Long reviewId);
-//    ReviewOnMovieDto getReviewOnMovie(Long reviewId);
-//    Optional<List<ReviewOnMovieEntity>> findAllReviewsOnMovies();
-//    List<ReviewOnMovieDto> getAllReviewsOnMovies();
-    Optional<List<ReviewOnMovieEntity>> findAllReviewsOnMoviesByUser(Long userId);
-    List<ReviewOnMovieDto> getAllReviewsOnMoviesByUser(Long userId);
-    Optional<List<ReviewOnMovieEntity>> findAllReviewsOnMovie(Long movieId);
-    List<ReviewOnMovieDto> getAllReviewsOnMovie(Long movieId);
-
-
-//    Optional<ReviewOnSeriesEntity> findReviewOnSeries(Long reviewId);
-//    ReviewOnSeriesDto getReviewOnSeries(Long reviewId);
-//    Optional<List<ReviewOnSeriesEntity>> findAllReviewsOnSeries();
-//    List<ReviewOnSeriesDto> getAllReviewsOnSeries(Long seriesId);
-    Optional<List<ReviewOnSeriesEntity>> findAllReviewsOnSeriesByUser(Long userId);
-    List<ReviewOnSeriesDto> getAllReviewsOnSeriesByUser(Long userId);
-    Optional<List<ReviewOnSeriesEntity>> findAllReviewsOnSeries(Long seriesId);
-    List<ReviewOnSeriesDto> getAllReviewsOnSeries(Long seriesId);
-
+//    Optional<List<ReviewOnSeriesEntity>> findAllReviewsOnSeriesByUser(Long userId);
+//    List<ReviewOnSeriesDto> getAllReviewsOnSeriesByUser(Long userId);
+    Optional<List<ReviewOnSeriesEntity>> findAllReviewsOnSeriesByUserRole(Long seriesId, String userRole);
+    List<FullReviewDto> getAllReviewsOnSeriesByCritics(Long seriesId);
+    List<FullReviewDto> getAllReviewsOnSeriesByUsers(Long seriesId);
+    Optional<AvgRating> findAvgRatingsBySeriesAndUserRole(Long movieId, String userRole);
+    AvgRating getRatingsBySeriesAndCritics(Long movieId);
+    AvgRating getRatingsBySeriesAndUsers(Long movieId);
+    Map<Long,AvgRating> findAllRatingsWithSeriesByUserRole(String userRole);
+    Map<Long,AvgRating> getAllRatingsWithSeriesByUserRole(String userRole);
     //TODO: implementation and create + delete + update
 
 }

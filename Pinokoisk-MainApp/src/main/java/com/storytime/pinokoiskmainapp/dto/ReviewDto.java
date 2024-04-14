@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ReviewDto {
     private String reviewId;
-    private String reviewHeader;
-    private String reviewBody;
+    private String header;
+    private String body;
 }

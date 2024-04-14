@@ -20,11 +20,11 @@ public class ReviewOnSeriesMapper implements Mapper<ReviewOnSeriesEntity, Review
         return new ReviewOnSeriesDto(
                 reviewOnSeriesEntity.getId(),
                 reviewOnSeriesEntity.getRating(),
-                reviewService.getReviewText(reviewOnSeriesEntity.getReview()),
+                reviewOnSeriesEntity.getReview() != null ? reviewService.getReviewText(reviewOnSeriesEntity.getReview()): null,
                 reviewOnSeriesEntity.getSeries().getId(),
                 reviewOnSeriesEntity.getSeries().getName(),
                 reviewOnSeriesEntity.getUser().getId(),
-                reviewOnSeriesEntity.getUser().getUserName()
+                reviewOnSeriesEntity.getUser().getUsername()
         );
     }
 

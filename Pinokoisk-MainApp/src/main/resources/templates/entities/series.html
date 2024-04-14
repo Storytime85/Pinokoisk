@@ -87,6 +87,27 @@
                 <a th:href="@{/persons/{id}(id=${personEntry.id})}" th:text="${personEntry.name}"></a>
             </div>
         </div>
+        <div id = "reviews">
+            <div th:if="${userRating == null}">
+                <p>Оценок пользователей нет</p>
+            </div>
+            <div th:unless="${userRating} == null">
+                <p>Рейтинг пользователей: <span th:text="${userRating.avgRate}">AVG USER RATING</span>
+                    , всего оценок: <span th:text="${userRating.count}">USER REVIEWS COUNT</span></p>
+            </div>
+            <div th:if="${criticRating == null}">
+                <p>Оценок критиков нет</p>
+            </div>
+            <div th:unless="${criticRating == null}">
+                <p>Рейтинг критиков: <span th:text="${criticRating.avgRate}"> AVG CRITICS RATING</span>
+                    , всего оценок: <span th:text="${criticRating.count}">CRITIC REVIEWS COUNT</span></p>
+            </div>
+            <div th:if="${avgAll.count != 0}">
+                <p>Общий рейтинг: <span th:text="${avgAll.avgRate}">AVG RATING</span>, Всего оценок:
+                    <span th:text="${avgAll.count}">AVG COUNT</span></p>
+                <a th:href="@{reviews/{id}(id =${one_series.id})}" th:text="'Ознакомиться с рецензиями'">GET REVIEW TEXTS</a>
+            </div>
+        </div>
     </div>
 </div>
 </body>

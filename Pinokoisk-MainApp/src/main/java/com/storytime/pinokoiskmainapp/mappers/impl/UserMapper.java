@@ -20,7 +20,7 @@ public class UserMapper implements Mapper<UserEntity, UserDto> {
     public UserDto mapTo(UserEntity userEntity) {
         return new UserDto(
                 userEntity.getId(),
-                userEntity.getUserName(),
+                userEntity.getUsername(),
                 userEntity.getRole(),
                 userEntity.getAvatar(),
                 userEntity.getMovieReviews().stream().map(reviewOnMovieMapper::mapTo).collect(Collectors.toList()),
